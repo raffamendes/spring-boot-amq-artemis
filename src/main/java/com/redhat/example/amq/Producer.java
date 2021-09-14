@@ -15,6 +15,6 @@ public class Producer {
 	
 	public void send(String message) {
 		logger.info("sending message='{}'",message);
-		jmsTemplate.convertAndSend(message);
+		jmsTemplate.convertAndSend("exampleQueue",message);
 	}
 }

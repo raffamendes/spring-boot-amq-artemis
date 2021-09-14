@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.redhat.example.amq.Producer;
-import com.redhat.example.amq.QueueSender;
 
 @RestController
 @RequestMapping("/message")
@@ -16,9 +15,6 @@ public class MessageController {
 	
 	@Autowired
 	private Producer producer;
-	
-	@Autowired
-	private QueueSender sender;
 	
 	@PostMapping("/post")
 	public void send(@RequestBody String message) {
@@ -28,8 +24,7 @@ public class MessageController {
 	
 	@GetMapping("/hello")
 	public String hello() throws Exception {
-		sender.send("teste");
-		//producer.send("teste");
+		producer.send("teste");
 		return "hello";
 	}
 

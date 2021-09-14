@@ -18,10 +18,7 @@ package com.redhat.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.jms.annotation.EnableJms;
-
-import com.redhat.example.amq.QueueSender;
 
 @SpringBootApplication
 @EnableJms
@@ -30,10 +27,5 @@ public class ExampleApplication {
     public static void main(String[] args) {
         SpringApplication.run(ExampleApplication.class, args);
     }
-    
-    @Bean
-	public QueueSender sender() {
-		return new QueueSender();
-	}
 
 }

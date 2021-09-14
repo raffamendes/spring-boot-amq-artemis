@@ -10,7 +10,7 @@ import org.springframework.jms.core.JmsTemplate;
 @Configuration
 public class ProducerConfig {
 
-	@Value("${artemis.broker.url}")
+	@Value("${artemis.broker-url}")
 	private String brokerUrl;
 
 	@Bean
