@@ -105,6 +105,10 @@
 			<version>2.16.0.redhat-00022</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 		<dependency>
+			<groupId>javax.json</groupId>
+			<artifactId>javax.json-api</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.jboss.arquillian.junit</groupId>
 			<artifactId>arquillian-junit-standalone</artifactId>
 			<scope>test</scope>
