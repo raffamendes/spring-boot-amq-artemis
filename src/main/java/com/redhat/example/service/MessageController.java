@@ -23,7 +23,7 @@ public class MessageController {
 	
 	
 	@GetMapping("/hello")
-	public String hello() throws Exception {
+	public String hello(){
 		producer.send("teste");
 		return "hello";
 	}
