@@ -105,6 +105,11 @@
 			<version>2.16.0.redhat-00022</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 		<dependency>
+			<groupId>org.apache.qpid</groupId>
+			<artifactId>qpid-jms-client</artifactId>
+			<version>1.0.0.redhat-00001</version>
+		</dependency>
+		<dependency>
 			<groupId>javax.json</groupId>
 			<artifactId>javax.json-api</artifactId>
 		</dependency>

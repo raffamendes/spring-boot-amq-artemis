@@ -1,4 +1,4 @@
-package com.redhat.example.amq;
+package com.redhat.example.amq.core;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

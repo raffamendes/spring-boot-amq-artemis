@@ -1,4 +1,4 @@
-package com.redhat.example.amq;
+package com.redhat.example.amq.core;
 
 import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,18 +29,17 @@ public class AmqConfig {
 	public JmsTemplate jmsTemplate() {
 		return new JmsTemplate(cachingConnectionFactory());
 	}
-	
+
 	@Bean
-    public DefaultJmsListenerContainerFactory jmsListenerContainerFactory() {
-        DefaultJmsListenerContainerFactory factory 
-          = new DefaultJmsListenerContainerFactory();
-        factory.setConnectionFactory(cachingConnectionFactory());
-        return factory;
-    }
+	public DefaultJmsListenerContainerFactory jmsListenerContainerFactory() {
+		DefaultJmsListenerContainerFactory factory 	= new DefaultJmsListenerContainerFactory();
+		factory.setConnectionFactory(cachingConnectionFactory());
+		return factory;
+	}
 
 	@Bean
 	public Producer producer() {
 		return new Producer();
 	}
-	
+
 }
