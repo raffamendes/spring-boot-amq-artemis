@@ -10,8 +10,8 @@ public class Consumer {
 	
 	private static final Logger logger = LoggerFactory.getLogger(Consumer.class);
 	
-//	@JmsListener(destination = "add-test::exampleQueue", containerFactory = "jmsListenerContainerFactory")
-//	public void printMessage(String message) {
-//		logger.info("receiving message='{}'",message);
-//	}
+	@JmsListener(destination = "add-test::exampleQueue", containerFactory = "jmsListenerContainerFactory")
+	public void printMessage(String message) {
+		logger.info("receiving message='{}'",message);
+	}
 }
