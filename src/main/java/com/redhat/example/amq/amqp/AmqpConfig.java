@@ -27,17 +27,20 @@ public class AmqpConfig {
 	private String queueName;
 	
 	private static final Logger logger = LoggerFactory.getLogger(Consumer.class);
+	
+	private ConnectionFactory getConnectionFactory() {
+		logger.info("amqp connection uri={}",brokerUrl);
+		ConnectionFactory connectionFactory = new JmsConnectionFactory(brokerUrl);
+		return connectionFactory;
+	}
 
 
 	public void sender(String message) throws JMSException {
 		Connection connection = null;
-		logger.info("camqp connection uri={}",brokerUrl);
-		ConnectionFactory connectionFactory = new JmsConnectionFactory(brokerUrl);
-
 		try {
-
+			
 			// Step 1. Create an amqp qpid 1.0 connection
-			connection = connectionFactory.createConnection();
+			connection = getConnectionFactory().createConnection();
 
 			// Step 2. Create a session
 			Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
@@ -51,13 +54,6 @@ public class AmqpConfig {
 
 			connection.start();
 
-			// Step 5. create a moving receiver, this means the message will be removed from the queue
-			MessageConsumer consumer = session.createConsumer(queue);
-
-			// Step 7. receive the simple message
-			TextMessage m = (TextMessage) consumer.receive(5000);
-			System.out.println("message = " + m.getText());
-
 		} catch (JMSException e) {
 			e.printStackTrace();
 		} finally {
@@ -66,7 +62,25 @@ public class AmqpConfig {
 				connection.close();
 			}
 		}
-
+	}
+	
+	public void consumer() throws JMSException {
+		Connection connection = null;
+		try {
+			connection = getConnectionFactory().createConnection();
+			Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+			Queue queue = session.createQueue(queueName);
+			connection.start();
+			MessageConsumer consumer = session.createConsumer(queue);
+			TextMessage message = (TextMessage) consumer.receive(5000);
+			logger.info("receiving message={}",message.getText());
+		} catch (JMSException e) {
+			e.printStackTrace();
+		}finally {
+			if(connection != null) {
+				connection.close();
+			}
+		}
 	}
 
 }
