@@ -24,6 +24,7 @@ public class MessageController {
 	@Autowired
 	private Producer producer;
 	
+	@Autowired
 	private OpenWireConfig openWire;
 	
 	@PostMapping("/post")
