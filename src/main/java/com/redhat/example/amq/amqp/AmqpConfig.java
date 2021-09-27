@@ -64,7 +64,7 @@ public class AmqpConfig {
 		}
 	}
 	
-	public void consumer() throws JMSException {
+	public String consumer() throws JMSException {
 		Connection connection = null;
 		try {
 			connection = getConnectionFactory().createConnection();
@@ -74,8 +74,10 @@ public class AmqpConfig {
 			MessageConsumer consumer = session.createConsumer(queue);
 			TextMessage message = (TextMessage) consumer.receive(5000);
 			logger.info("receiving message={}",message.getText());
+			return message.getText();
 		} catch (JMSException e) {
 			e.printStackTrace();
+			throw e;
 		}finally {
 			if(connection != null) {
 				connection.close();

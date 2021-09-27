@@ -12,16 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.redhat.example.amq.amqp.AmqpConfig;
 import com.redhat.example.amq.core.Producer;
+import com.redhat.example.amq.openwire.OpenWireConfig;
 
 @RestController
 @RequestMapping("/message")
 public class MessageController {
 	
 	@Autowired
-	private AmqpConfig amqpProducer;
+	private AmqpConfig amqp;
 	
 	@Autowired
 	private Producer producer;
+	
+	private OpenWireConfig openWire;
 	
 	@PostMapping("/post")
 	public void send(@RequestBody String message) {
@@ -31,14 +34,30 @@ public class MessageController {
 	
 	@GetMapping("/amqp/{message}")
 	public String amqpMessage(@PathVariable String message) throws JMSException{
-		amqpProducer.sender(message);
+		amqp.sender(message);
 		return "Sent Amqp";
+	}
+	
+	@GetMapping("/amqp/read/last")
+	public String readAmqpMessage(@PathVariable String message) throws JMSException{
+		return amqp.consumer();
 	}
 	
 	@GetMapping("/jms/{message}")
 	public String jmsCore(@PathVariable String message) throws JMSException{
 		producer.send(message);
 		return "Sent Jms";
+	}
+	
+	@GetMapping("/openwire/{message}")
+	public String OpenWireMessage(@PathVariable String message) throws JMSException{
+		openWire.sender(message);
+		return "Sent OpenWire";
+	}
+	
+	@GetMapping("/openwire/read/last")
+	public String readOpenWireMessage() throws JMSException{
+		return "Sent OpenWire";
 	}
 	
 

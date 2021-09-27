@@ -1,0 +1,17 @@
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: config
+data:
+  AMQP_BROKER_URL: >-
+    failover:(amqp://broker-test-ss-0.broker-test-hdls-svc.amq.svc.cluster.local:5672,amqp://broker-test-ss-1.broker-test-hdls-svc.amq.svc.cluster.local:5672)?jms.username=${AMQ_CLUSTER_USER}&jms.password=${AMQ_CLUSTER_PASSWORD}
+  AMQ_CLUSTER_PASSWORD: NfZAjak6
+  AMQ_CLUSTER_USER: W6nrZd6L
+  BROKER_URL: 'tcp://broker-test-ss-0.broker-test-hdls-svc.amq.svc.cluster.local:61616'
+  LOG_LEVEL: INFO
+  QUEUE: amqp-address::amqp-queue
+  OPENWIRE_QUEUE: openwire-address::openwire-queue
+  OPENWIRE_BROKER_URL: >-
+    failover:(tcp://broker-test-ss-0.broker-test-hdls-svc.amq.svc.cluster.local:5672,tcp://broker-test-ss-1.broker-test-hdls-svc.amq.svc.cluster.local:5672)?jms.username=${AMQ_CLUSTER_USER}&jms.password=${AMQ_CLUSTER_PASSWORD}
+
