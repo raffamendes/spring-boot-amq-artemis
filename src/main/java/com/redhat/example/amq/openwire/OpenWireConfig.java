@@ -25,12 +25,18 @@ public class OpenWireConfig {
 	@Value("${openwire.queue.name}")
 	private String queueName;
 	
+	@Value("${amq.cluster.user}")
+	private String brokerUser;
+	
+	@Value("${amq.cluster.pass}")
+	private String brokerPass;
+	
 	private static final Logger logger = LoggerFactory.getLogger(OpenWireConfig.class);
 
 	public void sender(String message) throws JMSException {
 		 Connection connection = null;
 	      try {
-	         ConnectionFactory cf = new ActiveMQConnectionFactory(brokerUrl);
+	         ConnectionFactory cf = new ActiveMQConnectionFactory(brokerUser,brokerPass,brokerUrl);
 	         connection = cf.createConnection();
 	         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 	         Queue queue = session.createQueue(queueName);
