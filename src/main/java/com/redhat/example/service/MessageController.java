@@ -46,7 +46,7 @@ public class MessageController {
 	
 
 	@GetMapping("/amqp/broken/consumer")
-	public String readAmqpMessageBroken(@PathVariable String message) throws JMSException{
+	public String readAmqpMessageBroken() throws JMSException{
 		for(int i = 0; i<5; i++) {
 			amqp.consumerBroken();
 		}
