@@ -84,5 +84,28 @@ public class AmqpConfig {
 			}
 		}
 	}
+	
+	public String consumerBroken() throws JMSException {
+		Connection connection = null;
+		try {
+			connection = getConnectionFactory().createConnection();
+			Session session = connection.createSession(true, Session.SESSION_TRANSACTED);
+			Queue queue = session.createQueue(queueName);
+			connection.start();
+			MessageConsumer consumer = session.createConsumer(queue);
+			TextMessage message = (TextMessage) consumer.receive(5000);
+			session.rollback();
+//			logger.info("receiving message={}",message.getText());
+			session.close();
+			return message.getText();
+		} catch (JMSException e) {
+			e.printStackTrace();
+			throw e;
+		}finally {
+			if(connection != null) {
+				connection.close();
+			}
+		}
+	}
 
 }

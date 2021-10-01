@@ -44,6 +44,15 @@ public class MessageController {
 		return amqp.consumer();
 	}
 	
+
+	@GetMapping("/amqp/broken/consumer")
+	public String readAmqpMessageBroken(@PathVariable String message) throws JMSException{
+		for(int i = 0; i<5; i++) {
+			amqp.consumerBroken();
+		}
+		return "Sent to DLQ";
+	}
+	
 	@GetMapping("/jms/{message}")
 	public String jmsCore(@PathVariable String message) throws JMSException{
 		producer.send(message);
