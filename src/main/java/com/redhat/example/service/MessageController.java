@@ -40,7 +40,7 @@ public class MessageController {
 	}
 	
 	@GetMapping("/amqp/read/last")
-	public String readAmqpMessage(@PathVariable String message) throws JMSException{
+	public String readAmqpMessage() throws JMSException{
 		return amqp.consumer();
 	}
 	
