@@ -67,7 +67,7 @@ public class MessageController {
 	
 	@GetMapping("/openwire/read/last")
 	public String readOpenWireMessage() throws JMSException{
-		return "Sent OpenWire";
+		return openWire.readLast();
 	}
 	
 
