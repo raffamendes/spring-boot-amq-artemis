@@ -21,7 +21,7 @@ public class MessageController {
 	
 	@Autowired
 	private AmqpConfig amqp;
-	
+	 
 	@Autowired
 	private Producer producer;
 	
